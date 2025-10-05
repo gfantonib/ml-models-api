@@ -40,7 +40,3 @@ class ProbabilityMatrix(BaseModel):
 class AntTrail(BaseModel):
     trail: List[Segment]
     total_distance: float
-
-
-class AntsTrails(BaseModel):
-    trails: List[AntTrail]

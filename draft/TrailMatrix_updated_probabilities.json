@@ -6,96 +6,46 @@
                     "from_p": {
                         "idx": 1,
                         "x": 2.0,
-                        "y": 5.0
+                        "y": 3.0
                     },
                     "to_p": {
                         "idx": 2,
-                        "x": 4.0,
+                        "x": 1.0,
                         "y": 2.0
-                    },
-                    "distance": 3.605551275463989,
-                    "pheromone": 1.0,
-                    "probability": 0.12468827930174567
-                },
-                {
-                    "from_p": {
-                        "idx": 1,
-                        "x": 2.0,
-                        "y": 5.0
-                    },
-                    "to_p": {
-                        "idx": 3,
-                        "x": 2.0,
-                        "y": 0.0
-                    },
-                    "distance": 5.0,
-                    "pheromone": 1.0,
-                    "probability": 0.06483790523690774
-                },
-                {
-                    "from_p": {
-                        "idx": 1,
-                        "x": 2.0,
-                        "y": 5.0
-                    },
-                    "to_p": {
-                        "idx": 4,
-                        "x": 3.0,
-                        "y": 4.0
                     },
                     "distance": 1.4142135623730951,
                     "pheromone": 1.0,
-                    "probability": 0.8104738154613467
-                }
-            ],
-            "total_distance": null
-        },
-        {
-            "segments": [
+                    "probability": 0.7386363636363635
+                },
                 {
                     "from_p": {
-                        "idx": 2,
-                        "x": 4.0,
-                        "y": 2.0
-                    },
-                    "to_p": {
                         "idx": 1,
                         "x": 2.0,
-                        "y": 5.0
+                        "y": 3.0
+                    },
+                    "to_p": {
+                        "idx": 3,
+                        "x": 5.0,
+                        "y": 1.0
                     },
                     "distance": 3.605551275463989,
                     "pheromone": 1.0,
-                    "probability": 0.1913875598086125
+                    "probability": 0.11363636363636366
                 },
                 {
                     "from_p": {
-                        "idx": 2,
-                        "x": 4.0,
-                        "y": 2.0
-                    },
-                    "to_p": {
-                        "idx": 3,
+                        "idx": 1,
                         "x": 2.0,
-                        "y": 0.0
-                    },
-                    "distance": 2.8284271247461903,
-                    "pheromone": 1.0,
-                    "probability": 0.31100478468899523
-                },
-                {
-                    "from_p": {
-                        "idx": 2,
-                        "x": 4.0,
-                        "y": 2.0
+                        "y": 3.0
                     },
                     "to_p": {
                         "idx": 4,
-                        "x": 3.0,
-                        "y": 4.0
+                        "x": 5.0,
+                        "y": 2.0
                     },
-                    "distance": 2.23606797749979,
+                    "distance": 3.1622776601683795,
                     "pheromone": 1.0,
-                    "probability": 0.49760765550239233
+                    "probability": 0.1477272727272727
                 }
             ],
             "total_distance": null
@@ -104,98 +54,148 @@
             "segments": [
                 {
                     "from_p": {
-                        "idx": 3,
-                        "x": 2.0,
-                        "y": 0.0
-                    },
-                    "to_p": {
-                        "idx": 1,
-                        "x": 2.0,
-                        "y": 5.0
-                    },
-                    "distance": 5.0,
-                    "pheromone": 1.0,
-                    "probability": 0.17871222076215507
-                },
-                {
-                    "from_p": {
-                        "idx": 3,
-                        "x": 2.0,
-                        "y": 0.0
-                    },
-                    "to_p": {
                         "idx": 2,
-                        "x": 4.0,
+                        "x": 1.0,
                         "y": 2.0
                     },
-                    "distance": 2.8284271247461903,
-                    "pheromone": 1.0,
-                    "probability": 0.5584756898817345
-                },
-                {
-                    "from_p": {
-                        "idx": 3,
-                        "x": 2.0,
-                        "y": 0.0
-                    },
-                    "to_p": {
-                        "idx": 4,
-                        "x": 3.0,
-                        "y": 4.0
-                    },
-                    "distance": 4.123105625617661,
-                    "pheromone": 1.0,
-                    "probability": 0.2628120893561104
-                }
-            ],
-            "total_distance": null
-        },
-        {
-            "segments": [
-                {
-                    "from_p": {
-                        "idx": 4,
-                        "x": 3.0,
-                        "y": 4.0
-                    },
                     "to_p": {
                         "idx": 1,
                         "x": 2.0,
-                        "y": 5.0
+                        "y": 3.0
                     },
                     "distance": 1.4142135623730951,
                     "pheromone": 1.0,
-                    "probability": 0.6589147286821705
+                    "probability": 0.8047337278106509
                 },
                 {
                     "from_p": {
-                        "idx": 4,
-                        "x": 3.0,
-                        "y": 4.0
-                    },
-                    "to_p": {
                         "idx": 2,
-                        "x": 4.0,
+                        "x": 1.0,
                         "y": 2.0
-                    },
-                    "distance": 2.23606797749979,
-                    "pheromone": 1.0,
-                    "probability": 0.2635658914728682
-                },
-                {
-                    "from_p": {
-                        "idx": 4,
-                        "x": 3.0,
-                        "y": 4.0
                     },
                     "to_p": {
                         "idx": 3,
-                        "x": 2.0,
-                        "y": 0.0
+                        "x": 5.0,
+                        "y": 1.0
                     },
                     "distance": 4.123105625617661,
                     "pheromone": 1.0,
-                    "probability": 0.07751937984496125
+                    "probability": 0.09467455621301776
+                },
+                {
+                    "from_p": {
+                        "idx": 2,
+                        "x": 1.0,
+                        "y": 2.0
+                    },
+                    "to_p": {
+                        "idx": 4,
+                        "x": 5.0,
+                        "y": 2.0
+                    },
+                    "distance": 4.0,
+                    "pheromone": 1.0,
+                    "probability": 0.10059171597633138
+                }
+            ],
+            "total_distance": null
+        },
+        {
+            "segments": [
+                {
+                    "from_p": {
+                        "idx": 3,
+                        "x": 5.0,
+                        "y": 1.0
+                    },
+                    "to_p": {
+                        "idx": 1,
+                        "x": 2.0,
+                        "y": 3.0
+                    },
+                    "distance": 3.605551275463989,
+                    "pheromone": 1.0,
+                    "probability": 0.06772908366533865
+                },
+                {
+                    "from_p": {
+                        "idx": 3,
+                        "x": 5.0,
+                        "y": 1.0
+                    },
+                    "to_p": {
+                        "idx": 2,
+                        "x": 1.0,
+                        "y": 2.0
+                    },
+                    "distance": 4.123105625617661,
+                    "pheromone": 1.0,
+                    "probability": 0.05179282868525897
+                },
+                {
+                    "from_p": {
+                        "idx": 3,
+                        "x": 5.0,
+                        "y": 1.0
+                    },
+                    "to_p": {
+                        "idx": 4,
+                        "x": 5.0,
+                        "y": 2.0
+                    },
+                    "distance": 1.0,
+                    "pheromone": 1.0,
+                    "probability": 0.8804780876494024
+                }
+            ],
+            "total_distance": null
+        },
+        {
+            "segments": [
+                {
+                    "from_p": {
+                        "idx": 4,
+                        "x": 5.0,
+                        "y": 2.0
+                    },
+                    "to_p": {
+                        "idx": 1,
+                        "x": 2.0,
+                        "y": 3.0
+                    },
+                    "distance": 3.1622776601683795,
+                    "pheromone": 1.0,
+                    "probability": 0.08602150537634407
+                },
+                {
+                    "from_p": {
+                        "idx": 4,
+                        "x": 5.0,
+                        "y": 2.0
+                    },
+                    "to_p": {
+                        "idx": 2,
+                        "x": 1.0,
+                        "y": 2.0
+                    },
+                    "distance": 4.0,
+                    "pheromone": 1.0,
+                    "probability": 0.05376344086021505
+                },
+                {
+                    "from_p": {
+                        "idx": 4,
+                        "x": 5.0,
+                        "y": 2.0
+                    },
+                    "to_p": {
+                        "idx": 3,
+                        "x": 5.0,
+                        "y": 1.0
+                    },
+                    "distance": 1.0,
+                    "pheromone": 1.0,
+                    "probability": 0.8602150537634408
                 }
             ],
             "total_distance": null
