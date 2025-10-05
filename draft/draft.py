@@ -1,8 +1,8 @@
+import json
 import random
-from typing import List, Tuple
+from typing import Any, List, Optional, Tuple
 
 import numpy as np
-
 from draft_plot import plot_first_and_last_trail, plot_total_distance_progression
 from objects import (
     AntColonyModelInput,
@@ -20,11 +20,18 @@ from objects import (
 class AntColonyModel:
     def __init__(self, input: AntColonyModelInput):
         self.model_params = AntColonyModelParams()
+        self._eject_object(self.model_params)
         self.points: List[Point] = self._get_points(input.points)
         self.probability_matrix: ProbabilityMatrix = self._build_probability_matrix()
+        self._eject_object(self.probability_matrix)
         self.n_rows = len(self.probability_matrix.matrix)
         self.n_columns = len(self.probability_matrix.matrix[0])
-        self.mutable_pheromone_matrix: PheromoneMatrix = self._build_pheromone_matrix()
+
+    def _eject_object(self, object: Any, name: str = ""):
+        path = object.__class__.__name__ + name + ".json"
+        with open(path, "w") as f:
+            json_str = object.model_dump_json()
+            f.write(json_str)
 
     def _get_points(self, points: List[Tuple[float, float]]) -> List[Point]:
         return [Point(x=point[0], y=point[1], idx=i) for i, point in enumerate(points)]
@@ -36,7 +43,6 @@ class AntColonyModel:
 
     def _build_probability_matrix(self) -> ProbabilityMatrix:
         rows = []
-        seg_idx = 0
         points = self.points
         for i in range(len(points)):
             columns = []
@@ -46,38 +52,17 @@ class AntColonyModel:
                     b = np.array([points[j].x, points[j].y])
                     distance = np.linalg.norm(a - b)
                     distance_obj = Segment(
-                        idx=seg_idx,
                         distance=distance,
                         point_a=points[i],
                         point_b=points[j],
                         probability=0,
+                        pheromone=self.model_params.initial_pheromone,
                     )
                     columns.append(distance_obj)
-                    seg_idx += 1
             rows.append(columns)
         return ProbabilityMatrix(matrix=rows)
 
-    def _build_pheromone_matrix(self) -> PheromoneMatrix:
-        probability_matrix = self.probability_matrix
-        rows = []
-        for i in range(self.n_rows):
-            columns = []
-            for j in range(self.n_columns):
-                idx = probability_matrix.matrix[i][j].idx
-                point_a = probability_matrix.matrix[i][j].point_a
-                point_b = probability_matrix.matrix[i][j].point_b
-                columns.append(
-                    Pheromone(
-                        idx=idx,
-                        pheromone=self.model_params.initial_pheromone,
-                        point_a=point_a,
-                        point_b=point_b,
-                    )
-                )
-            rows.append(columns)
-        return PheromoneMatrix(matrix=rows)
-
-    def _is_segment_in_pheromone(self, segment: Segment, pheromone: Pheromone) -> bool:
+    def _is_segment_in_pheromone(self, segment: Segment, pheromone: Segment) -> bool:
         segment_point_a = segment.point_a
         segment_point_b = segment.point_b
         pheromone_point_a = pheromone.point_a
@@ -90,7 +75,7 @@ class AntColonyModel:
         )
 
     def _get_pheromone_diffusion(
-        self, ants_trails: AntsTrails, pheromone: Pheromone
+        self, ants_trails: AntsTrails, pheromone: Segment
     ) -> int:
         diffusion = 0
         for ant_trail in ants_trails.trails:
@@ -100,7 +85,7 @@ class AntColonyModel:
         return diffusion
 
     def _update_pheromone(self, ants_trails: AntsTrails, i: int, j: int) -> float:
-        pheromone_obj = self.mutable_pheromone_matrix.matrix[i][j]
+        pheromone_obj = self.probability_matrix.matrix[i][j]
         pheromone_diffusion = self._get_pheromone_diffusion(ants_trails, pheromone_obj)
         old_pheromone = pheromone_obj.pheromone
 
@@ -114,7 +99,7 @@ class AntColonyModel:
         for i in range(self.n_rows):
             for j in range(self.n_columns):
                 if i != j:
-                    self.mutable_pheromone_matrix.matrix[i][j].pheromone = (
+                    self.probability_matrix.matrix[i][j].pheromone = (
                         self._update_pheromone(ants_trails, i, j)
                     )
 
@@ -187,27 +172,26 @@ class AntColonyModel:
         idx = self._get_idx(probs)
         segment = probable_trail[idx]
         new_segment = Segment(
-            idx=segment.idx,
             distance=segment.distance,
             point_a=segment.point_a,
             point_b=segment.point_b,
         )
         trail.append(new_segment)
         probs = self.exclude_at(probs, idx)
+        probs = [p / sum(probs) for p in probs]
 
         while len(probs) > 0:
-            probs = [p / sum(probs) for p in probs]
             idx = self._get_idx(probs)
             segment = probable_trail[idx]
             distance = self._get_distance(segment.point_a, segment.point_b)
             new_segment = Segment(
-                idx=segment.idx,
                 distance=distance,
                 point_a=trail[-1].point_b,
                 point_b=segment.point_b,
             )
             trail.append(new_segment)
             probs = self.exclude_at(probs, idx)
+            probs = [p / sum(probs) for p in probs]
 
         return trail
 
@@ -224,7 +208,7 @@ class AntColonyModel:
 
     def run(self):
 
-        n_iterations = 100
+        n_iterations = 1000
         collection_of_ants_trails = []
         first_trail = None
 
@@ -256,7 +240,7 @@ def random_points(n_points: int, max_val: int) -> List[Tuple[int, int]]:
 
 
 def main():
-    points = random_points(20, 10)
+    points = random_points(4, 5)
     input = AntColonyModelInput(points=points)
     model = AntColonyModel(input=input)
     collection_of_ants_trails, first_trail, last_trail = model.run()

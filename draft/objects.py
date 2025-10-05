@@ -26,12 +26,11 @@ class Point(BaseModel):
 
 
 class Segment(BaseModel):
-    idx: int
     distance: float
+    pheromone: float
     point_a: Point
     point_b: Point
     probability: Optional[float] = None
-    marks: Optional[int] = None
 
 
 class ProbabilityMatrix(BaseModel):
@@ -39,21 +38,9 @@ class ProbabilityMatrix(BaseModel):
 
 
 class AntTrail(BaseModel):
-    idx: int
     trail: List[Segment]
     total_distance: float
 
 
 class AntsTrails(BaseModel):
     trails: List[AntTrail]
-
-
-class Pheromone(BaseModel):
-    idx: int
-    pheromone: float
-    point_a: Point
-    point_b: Point
-
-
-class PheromoneMatrix(BaseModel):
-    matrix: List[List[Pheromone]]
