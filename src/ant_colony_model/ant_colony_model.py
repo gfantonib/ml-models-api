@@ -1,9 +1,15 @@
 from typing import List, Tuple
 
-from objects import CollectionOfAntsTrails, Point, Segment, Trail, TrailMatrix
-from params import AntColonyModelParams
-from trail_manager import TrailMatrixManager
-from utils import calc_distance, eject_object, random_points
+from src.ant_colony_model.objects import (
+    CollectionOfAntsTrails,
+    Point,
+    Segment,
+    Trail,
+    TrailMatrix,
+)
+from src.ant_colony_model.params import AntColonyModelParams
+from src.ant_colony_model.trail_manager import TrailMatrixManager
+from src.ant_colony_model.utils import calc_distance, eject_object, random_points
 
 
 class AntColonyModel:
@@ -57,12 +63,19 @@ class AntColonyModel:
 
             manager.update_pheromones(chosen_trails)
 
-        return first_trail, CollectionOfAntsTrails(trails=collection_of_ants_trails)
+        last_trail = collection_of_ants_trails[-1]
+
+        return (
+            first_trail,
+            last_trail,
+            CollectionOfAntsTrails(trails=collection_of_ants_trails),
+        )
 
 
 if __name__ == "__main__":
     points = random_points(4, 5)
     model = AntColonyModel(points)
-    first_trail, collection_of_ants_trails = model.run()
+    first_trail, last_trail, collection_of_ants_trails = model.run()
     eject_object(first_trail, "_first_trail")
+    eject_object(last_trail, "_last_trail")
     eject_object(collection_of_ants_trails, "_collection_of_ants_trails")

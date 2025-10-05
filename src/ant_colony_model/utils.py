@@ -2,8 +2,9 @@ import random
 from typing import Any, List, Tuple
 
 import numpy as np
-from objects import Point, Segment
-from params import AntColonyModelParams
+
+from src.ant_colony_model.objects import Point, Segment
+from src.ant_colony_model.params import AntColonyModelParams
 
 
 def calc_distance(a: Point, b: Point) -> float:

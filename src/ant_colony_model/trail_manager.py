@@ -1,8 +1,8 @@
-from objects import TrailMatrix
-from params import AntColonyModelParams
-from pheromone_updater import PheromoneUpdater
-from probability_updater import ProbabilityUpdater
-from trail_choser import TrailChooser
+from src.ant_colony_model.objects import TrailMatrix
+from src.ant_colony_model.params import AntColonyModelParams
+from src.ant_colony_model.pheromone_updater import PheromoneUpdater
+from src.ant_colony_model.probability_updater import ProbabilityUpdater
+from src.ant_colony_model.trail_choser import TrailChooser
 
 
 class TrailMatrixManager:

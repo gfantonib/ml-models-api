@@ -1,5 +1,5 @@
-from objects import Segment, Trail, TrailMatrix
-from params import AntColonyModelParams
+from src.ant_colony_model.objects import Segment, Trail, TrailMatrix
+from src.ant_colony_model.params import AntColonyModelParams
 
 
 class PheromoneUpdater:

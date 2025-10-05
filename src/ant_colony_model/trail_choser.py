@@ -2,9 +2,9 @@ import random
 from copy import deepcopy
 from typing import List
 
-from objects import Segment, Trail, TrailMatrix
-from params import AntColonyModelParams
-from utils import calc_distance, get_segment_pheromone_density
+from src.ant_colony_model.objects import Segment, Trail, TrailMatrix
+from src.ant_colony_model.params import AntColonyModelParams
+from src.ant_colony_model.utils import calc_distance, get_segment_pheromone_density
 
 
 class TrailChooser:
