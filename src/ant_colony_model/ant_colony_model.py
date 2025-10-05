@@ -43,9 +43,9 @@ class AntColonyModel:
                 min_trail = trail
         return min_trail
 
-    def run(self) -> Tuple[Trail, CollectionOfAntsTrails]:
+    def run(self, max_iterations: int = 10) -> Tuple[Trail, CollectionOfAntsTrails]:
 
-        n_iterations = self.model_params.n_iterations
+        n_iterations = max_iterations
         collection_of_ants_trails = []
         first_trail = None
 

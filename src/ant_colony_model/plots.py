@@ -1,7 +1,8 @@
 from typing import Optional
 
 import plotly.graph_objects as go
-from objects import CollectionOfAntsTrails, Trail
+
+from src.ant_colony_model.objects import CollectionOfAntsTrails, Trail
 
 
 def plot_trail(trail: Trail, color: str = "blue", name: Optional[str] = None):
@@ -52,6 +53,23 @@ def plot_trail(trail: Trail, color: str = "blue", name: Optional[str] = None):
             showarrow=False,
             font=dict(size=12, color="black"),
         )
+
+    # Add a label to show the total distance of the trail
+    # Place it at the midpoint of the trail for visibility
+    mid_idx = len(x_coords) // 2
+    fig.add_annotation(
+        x=x_coords[mid_idx],
+        y=y_coords[mid_idx],
+        text=f"Total Distance: {total_dist:.2f}",
+        showarrow=True,
+        arrowhead=1,
+        ax=40,
+        ay=-40,
+        font=dict(size=14, color="red"),
+        bgcolor="white",
+        bordercolor="red",
+        borderwidth=1,
+    )
 
     # Layout styling
     fig.update_layout(
