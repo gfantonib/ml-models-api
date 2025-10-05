@@ -45,11 +45,12 @@ def plot_trail(trail: Trail, color: str = "blue", name: Optional[str] = None):
     )
 
     # Add points labels (index of each point)
-    for seg in trail.segments:
+    # Index all points, including the starting point
+    for idx, (x, y) in enumerate(zip(x_coords, y_coords), start=1):
         fig.add_annotation(
-            x=seg.to_p.x,
-            y=seg.to_p.y,
-            text=f"{seg.to_p.idx}",
+            x=x,
+            y=y,
+            text=f"{idx}",
             showarrow=False,
             font=dict(size=12, color="black"),
         )

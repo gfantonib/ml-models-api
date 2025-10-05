@@ -46,8 +46,10 @@ class AntColonyModel:
     def run(self, max_iterations: int = 10) -> Tuple[Trail, CollectionOfAntsTrails]:
 
         n_iterations = max_iterations
-        collection_of_ants_trails = []
         first_trail = None
+        minimum_trail = None
+
+        collection_of_ants_trails = []
 
         manager = TrailMatrixManager(self.matrix)
 
@@ -60,14 +62,16 @@ class AntColonyModel:
             collection_of_ants_trails.append(shortest_trail)
             if i == 0:
                 first_trail = shortest_trail
+                minimum_trail = shortest_trail
+
+            if shortest_trail.total_distance < minimum_trail.total_distance:
+                minimum_trail = shortest_trail
 
             manager.update_pheromones(chosen_trails)
 
-        last_trail = collection_of_ants_trails[-1]
-
         return (
             first_trail,
-            last_trail,
+            minimum_trail,
             CollectionOfAntsTrails(trails=collection_of_ants_trails),
         )
 
