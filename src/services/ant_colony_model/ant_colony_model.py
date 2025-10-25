@@ -1,24 +1,32 @@
 from typing import List, Tuple
 
-from src.ant_colony_model.objects import (
+from src.contracts.ant_colony_contracts import (
+    AntColonyRequest,
+    AntColonyResponse,
+    PointRequest,
+)
+from src.objects.ant_colony_objects import (
     CollectionOfAntsTrails,
     Point,
     Segment,
     Trail,
     TrailMatrix,
 )
-from src.ant_colony_model.params import AntColonyModelParams
-from src.ant_colony_model.trail_manager import TrailMatrixManager
-from src.ant_colony_model.utils import calc_distance, eject_object, random_points
+from src.params.ant_colony_params import AntColonyModelParams
+
+from .trail_manager import TrailMatrixManager
+from .utils import calc_distance, eject_object, random_points
 
 
 class AntColonyModel:
-    def __init__(self, points: List[tuple]):
-        self.matrix = self._build_trail_matrix(points)
+    def __init__(self, request: AntColonyRequest):
+        self.matrix = self._build_trail_matrix(request.points)
         self.model_params = AntColonyModelParams()
 
-    def _build_trail_matrix(self, points: List[tuple]) -> TrailMatrix:
-        point_objs = [Point(idx=i + 1, x=pt[0], y=pt[1]) for i, pt in enumerate(points)]
+    def _build_trail_matrix(self, points: List[PointRequest]) -> TrailMatrix:
+        point_objs = [
+            Point(idx=i + 1, x=point.x, y=point.y) for i, point in enumerate(points)
+        ]
         trails = []
         for i, from_p in enumerate(point_objs):
             segments = []
@@ -43,7 +51,7 @@ class AntColonyModel:
                 min_trail = trail
         return min_trail
 
-    def run(self, max_iterations: int = 10) -> Tuple[Trail, CollectionOfAntsTrails]:
+    def run(self, max_iterations: int = 10) -> AntColonyResponse:
 
         n_iterations = max_iterations
         first_trail = None
@@ -69,10 +77,12 @@ class AntColonyModel:
 
             manager.update_pheromones(chosen_trails)
 
-        return (
-            first_trail,
-            minimum_trail,
-            CollectionOfAntsTrails(trails=collection_of_ants_trails),
+        return AntColonyResponse(
+            first_trail=first_trail,
+            last_trail=minimum_trail,
+            collection_of_ants_trails=CollectionOfAntsTrails(
+                trails=collection_of_ants_trails
+            ),
         )
 
 

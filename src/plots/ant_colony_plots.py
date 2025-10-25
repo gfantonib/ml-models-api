@@ -2,7 +2,7 @@ from typing import Optional
 
 import plotly.graph_objects as go
 
-from src.ant_colony_model.objects import CollectionOfAntsTrails, Trail
+from src.objects.ant_colony_objects import CollectionOfAntsTrails, Trail
 
 
 def plot_trail(trail: Trail, color: str = "blue", name: Optional[str] = None):
