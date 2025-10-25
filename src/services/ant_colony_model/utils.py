@@ -3,8 +3,8 @@ from typing import Any, List, Tuple
 
 import numpy as np
 
-from src.ant_colony_model.objects import Point, Segment
-from src.ant_colony_model.params import AntColonyModelParams
+from src.objects.ant_colony_objects import Point, Segment
+from src.params.ant_colony_params import AntColonyModelParams
 
 
 def calc_distance(a: Point, b: Point) -> float:

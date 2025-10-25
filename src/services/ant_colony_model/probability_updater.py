@@ -1,6 +1,6 @@
-from src.ant_colony_model.objects import Segment, Trail, TrailMatrix
-from src.ant_colony_model.params import AntColonyModelParams
-from src.ant_colony_model.utils import get_segment_pheromone_density
+from src.objects.ant_colony_objects import Segment, Trail, TrailMatrix
+from src.params.ant_colony_params import AntColonyModelParams
+from src.services.ant_colony_model.utils import get_segment_pheromone_density
 
 
 class ProbabilityUpdater:
