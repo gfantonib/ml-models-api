@@ -2,7 +2,7 @@ import uvicorn
 from fastapi import FastAPI
 
 from src.api.v1.ant_colony_router import router as ant_colony_router
-from src.api.v1.pythagorean_support_machine import (
+from src.api.v1.pythagorean_support_machine_router import (
     router as pythagorean_support_machine_router,
 )
 
