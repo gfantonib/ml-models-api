@@ -1,6 +1,6 @@
 from fastapi import APIRouter
 
-from src.contracts.ant_colony_contracts import AntColonyRequest, AntColonyResponse
+from src.objects.ant_colony_objects import AntColonyRequest, AntColonyResponse
 from src.services.ant_colony_model.ant_colony_model import AntColonyModel
 
 router = APIRouter()

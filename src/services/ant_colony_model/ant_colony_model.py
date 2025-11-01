@@ -1,13 +1,11 @@
-from typing import List, Tuple
+from typing import List
 
-from src.contracts.ant_colony_contracts import (
+from src.objects.ant_colony_objects import (
     AntColonyRequest,
     AntColonyResponse,
-    PointRequest,
-)
-from src.objects.ant_colony_objects import (
     CollectionOfAntsTrails,
     Point,
+    PointRequest,
     Segment,
     Trail,
     TrailMatrix,
