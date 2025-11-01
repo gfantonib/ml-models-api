@@ -7,3 +7,5 @@
 3. genetic algorithm
 
 4. pythagorean support machine
+
+repo structure reference: https://github.com/ArjanCodes/examples/blob/main/2025/project/pyproject.toml
