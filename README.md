@@ -6,4 +6,4 @@
 
 3. genetic algorithm
 
-4. pythagorian support machine
+4. pythagorean support machine
