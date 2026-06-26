@@ -7,3 +7,17 @@ __pycache__/
 # Virtual environments
 .venv/
 .env/
+
+# Go
+bin/
+
+# IDE
+.idea/
+.vscode/
+*.swp
+
+# OS
+.DS_Store
+
+# Docker
+pgdata/

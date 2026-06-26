@@ -1,0 +1,40 @@
+syntax = "proto3";
+
+package ml_models;
+
+option go_package = "ml-models-api/protos/protos_go/models";
+
+message PythagoreanPoint {
+  repeated double coordinates = 1;
+}
+
+message PythagoreanGroup {
+  repeated PythagoreanPoint points = 1;
+  int32 n_points = 2;
+  PythagoreanPoint centroid = 3;
+}
+
+message PythagoreanPointStatus {
+  double probability = 1;
+  double distance = 2;
+  PythagoreanPoint point = 3;
+}
+
+message PythagoreanNode {
+  repeated PythagoreanPointStatus points_status = 1;
+  PythagoreanPoint centroid = 2;
+}
+
+message PythagoreanMainMatrix {
+  repeated PythagoreanNode nodes = 1;
+}
+
+message PythagoreanSupportMachineInput {
+  repeated PythagoreanPoint points = 1;
+  int32 n_groups = 2;
+}
+
+message PythagoreanSupportMachineOutput {
+  repeated PythagoreanGroup groups = 1;
+  int32 n_dimensions = 2;
+}

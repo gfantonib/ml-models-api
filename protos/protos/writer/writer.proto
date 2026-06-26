@@ -1,0 +1,23 @@
+syntax = "proto3";
+
+package writer;
+
+option go_package = "ml-models-api/protos/protos_go/writer";
+
+service Writer {
+  rpc WriteFitInput(WriteFitInputRequest) returns (WriteFitInputResponse);
+  // rpc WriteState(WriteStateRequest) returns (WriteStateResponse);
+  // rpc WriteInference(WriteInferenceRequest) returns (WriteInferenceResponse);
+  // rpc WriteOutbox(WriteOutboxRequest) returns (WriteOutboxResponse);
+}
+
+message WriteFitInputRequest {
+  string user_id = 1;
+  string model_name = 2;
+  bytes data = 3;
+}
+
+message WriteFitInputResponse {
+  string section_id = 1;
+  string fit_input_id = 2;
+}

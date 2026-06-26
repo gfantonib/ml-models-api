@@ -1,0 +1,197 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "ML Models Gateway",
+    "version": "0.1.0",
+    "description": "Gateway API for ML model fit and predict operations"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:8080"
+    }
+  ],
+  "paths": {
+    "/fit": {
+      "post": {
+        "summary": "Fit a model",
+        "description": "Validates input data against model proto and triggers a fit",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/FitRequest"
+              },
+              "examples": {
+                "ANT_COLONY_MODEL": {
+                  "summary": "Ant Colony fit",
+                  "value": {
+                    "user_id": "abc-123",
+                    "model_name": "ANT_COLONY_MODEL",
+                    "data": {
+                      "points": [
+                        {
+                          "x": 1.0,
+                          "y": 2.0
+                        },
+                        {
+                          "x": 3.0,
+                          "y": 4.0
+                        }
+                      ]
+                    }
+                  }
+                },
+                "PYTHAGOREAN_SUPPORT_MACHINE_MODEL": {
+                  "summary": "Pythagorean fit",
+                  "value": {
+                    "user_id": "abc-123",
+                    "model_name": "PYTHAGOREAN_SUPPORT_MACHINE_MODEL",
+                    "data": {
+                      "points": [
+                        {
+                          "coordinates": [
+                            1.0,
+                            2.0
+                          ]
+                        },
+                        {
+                          "coordinates": [
+                            3.0,
+                            4.0
+                          ]
+                        }
+                      ],
+                      "nGroups": 2
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Fit accepted",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Validation error",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/predict": {
+      "post": {
+        "summary": "Predict with a fitted model",
+        "description": "Triggers a predict on a previously fitted section",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PredictRequest"
+              },
+              "examples": {
+                "ANT_COLONY_MODEL": {
+                  "summary": "Ant Colony predict",
+                  "value": {
+                    "user_id": "abc-123",
+                    "model_name": "ANT_COLONY_MODEL",
+                    "section_id": "section-uuid-7"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Predict accepted",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Validation error",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "FitRequest": {
+        "type": "object",
+        "required": [
+          "user_id",
+          "model_name",
+          "data"
+        ],
+        "properties": {
+          "user_id": {
+            "type": "string"
+          },
+          "model_name": {
+            "type": "string",
+            "enum": [
+              "ANT_COLONY_MODEL",
+              "PYTHAGOREAN_SUPPORT_MACHINE_MODEL"
+            ]
+          },
+          "data": {
+            "type": "object",
+            "description": "Model-specific input data (validated against proto)"
+          }
+        }
+      },
+      "PredictRequest": {
+        "type": "object",
+        "required": [
+          "user_id",
+          "model_name",
+          "section_id"
+        ],
+        "properties": {
+          "user_id": {
+            "type": "string"
+          },
+          "model_name": {
+            "type": "string",
+            "enum": [
+              "ANT_COLONY_MODEL",
+              "PYTHAGOREAN_SUPPORT_MACHINE_MODEL"
+            ]
+          },
+          "section_id": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}
