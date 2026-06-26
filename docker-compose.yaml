@@ -1,10 +1,63 @@
 services:
-  ml-models-api:
-    image: ml-models-api:v1.0.0
-    build: .
+
+  # REST API — receives fit/predict requests, validates against protos
+  gateway:
+    build:
+      # Context is the repo root so the Dockerfile can access both protos/ and services/gateway/
+      context: .
+      # Path to the gateway's Dockerfile relative to the context
+      dockerfile: services/gateway/Dockerfile
     ports:
-      - "8000:80"
+      # Map host 8080 to container 8080 (gateway listens on :8080)
+      - "8080:8080"
     environment:
-      - DB_USER=admin
-      - DB_PASSWORD=secret
-      - DB_NAME=test.db
+      # Writer gRPC address (uses docker compose service name as host)
+      WRITER_ADDR: writer:50051
+    # Gateway starts after writer is ready (which itself waits for postgres)
+    depends_on:
+      - writer
+
+  # gRPC service — write-only data access layer for Postgres
+  writer:
+    build:
+      # Context is the repo root so the Dockerfile can access both protos/ and services/writer/
+      context: .
+      # Path to the writer's Dockerfile relative to the context
+      dockerfile: services/writer/Dockerfile
+    ports:
+      # Map host 50051 to container 50051 (writer listens on :50051)
+      - "50051:50051"
+    environment:
+      # Connection string for Postgres (uses docker compose service name as host)
+      DATABASE_URL: postgres://ml_models:ml_models@postgres:5432/ml_models
+    # Writer starts after postgres is healthy
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+  # PostgreSQL — stores sections, fit_inputs, states, inferences, outbox
+  postgres:
+    image: postgres:16-alpine
+    ports:
+      # Map host 5432 to container 5432
+      - "5432:5432"
+    environment:
+      # Default credentials for local development
+      POSTGRES_USER: ml_models
+      POSTGRES_PASSWORD: ml_models
+      POSTGRES_DB: ml_models
+    volumes:
+      # Persist data across container restarts
+      - pgdata:/var/lib/postgresql/data
+      # Run SQL files on first startup to create tables
+      - ./infra/postgres/init:/docker-entrypoint-initdb.d
+    healthcheck:
+      # Check if postgres is ready to accept connections
+      test: ["CMD-SHELL", "pg_isready -U ml_models"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+# Named volumes
+volumes:
+  pgdata:

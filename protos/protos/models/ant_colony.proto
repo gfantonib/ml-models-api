@@ -1,0 +1,47 @@
+syntax = "proto3";
+
+package ml_models;
+
+option go_package = "ml-models-api/protos/protos_go/models";
+
+message AntColonyPoint {
+  int32 idx = 1;
+  double x = 2;
+  double y = 3;
+}
+
+message AntColonySegment {
+  AntColonyPoint from_p = 1;
+  AntColonyPoint to_p = 2;
+  double distance = 3;
+  optional double pheromone = 4;
+  optional double probability = 5;
+}
+
+message AntColonyTrail {
+  repeated AntColonySegment segments = 1;
+  optional double total_distance = 2;
+}
+
+message AntColonyTrailMatrix {
+  repeated AntColonyTrail matrix = 1;
+}
+
+message AntColonyCollectionOfAntsTrails {
+  repeated AntColonyTrail trails = 1;
+}
+
+message AntColonyPointRequest {
+  double x = 1;
+  double y = 2;
+}
+
+message AntColonyRequest {
+  repeated AntColonyPointRequest points = 1;
+}
+
+message AntColonyResponse {
+  AntColonyTrail first_trail = 1;
+  AntColonyTrail last_trail = 2;
+  AntColonyCollectionOfAntsTrails collection_of_ants_trails = 3;
+}
